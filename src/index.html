@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="input">Entrer un nom: </label>
+        <input type="text" id="input" name="input"/>
+    </div>
+    <div>
+        <button type="button" id="btn"> Chercher</button>
+    </div>
+    <div>
+        <h1> Result</h1>
+        <p></p>
+    </div>
+    <script>
+        let btn = document.getElementById("btn");
+        
+        btn.addEventListener("click",() =>{
+            let user = document.getElementById("input").value;
+            if(user !==""){
+                let url = `http://localhost:3000/user/${user}`;
+                axios.get(url).then((res)=>{
+                document.getElementsByTagName('p')[0].innerHTML = JSON.stringify(res.data);
+            }).catch((err)=>{
+                document.getElementsByTagName('p')[0].innerHTML = err.message ; 
+            });
+            }else{
+                document.getElementsByTagName('p')[0].innerHTML = "Erreur : il faut entrer un username";
+            }
+  
+
+        });
+
+    </script>
+</body>
+</html>
